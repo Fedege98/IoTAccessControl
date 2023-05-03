@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 30px;
+  padding-top: 5px;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+} */
+
+.App-header {
+  background-color: #0b1415;
+  height: 10vh;
+  flex-direction: row;
+  width: 100%;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+.Pages {
+  margin-inline: 10%;
+
+}
+.loginDiv{
+  background: rgb(242, 0, 255);
+  top:"50%";
+  left:"50%";
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30%;
+  display:flex;
+  margin-inline: 25%;
+  border-radius: 37px;
+  /*  transform: translate(-50%, -50%) */
+  
+}
+
+.InputField{
+  width: fit-content;
+  align-self: center ;
+  width: 45vh;
+  margin-top: 20px;
+  border-radius: 9px;
+}
+
+.ButtonsinLogpage{ 
+  width: 45vh;
+  margin-top: 20px;
+  inline-size: auto;
+  align-self: center;
+}
+
+.Buttons{
+  margin-inline: 75px;
+  font-size: x-large;
+  margin-bottom: 25px;
+}
