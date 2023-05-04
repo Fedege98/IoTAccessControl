@@ -20,9 +20,35 @@
   width: 100%;
 }
 
+header {
+  /* display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between; */
+  background: currentColor;
+
+}
+
+footer {
+  margin-top: auto;
+}
+
 .App-link {
   color: #61dafb;
 }
+
+#formforsign {
+  max-width: 412px;
+  align-self: center;
+}
+.Icon {
+  width: 5vh;
+  border-radius: 20px;
+}
+
+/* #NavLinks {
+  padding-inline: ;
+} */
 
 /* @keyframes App-logo-spin {
   from {
@@ -32,41 +58,3 @@
     transform: rotate(360deg);
   }
 } */
-.Pages {
-  margin-inline: 10%;
-
-}
-.loginDiv{
-  background: rgb(242, 0, 255);
-  top:"50%";
-  left:"50%";
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 30%;
-  display:flex;
-  margin-inline: 25%;
-  border-radius: 37px;
-  /*  transform: translate(-50%, -50%) */
-  
-}
-
-.InputField{
-  width: fit-content;
-  align-self: center ;
-  width: 45vh;
-  margin-top: 20px;
-  border-radius: 9px;
-}
-
-.ButtonsinLogpage{ 
-  width: 45vh;
-  margin-top: 20px;
-  inline-size: auto;
-  align-self: center;
-}
-
-.Buttons{
-  margin-inline: 75px;
-  font-size: x-large;
-  margin-bottom: 25px;
-}
