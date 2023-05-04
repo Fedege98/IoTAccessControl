@@ -44,7 +44,20 @@ footer {
 .Icon {
   width: 5vh;
   border-radius: 20px;
+  margin-inline: 10%;
 }
+.NavButton {
+  margin-inline: 10%;
+}
+
+footer{
+  position: fixed;
+   bottom: 0;
+   width: 100%;
+}
+/* #NavLinks {
+  margin-inline: %;
+} */
 
 /* #NavLinks {
   padding-inline: ;
