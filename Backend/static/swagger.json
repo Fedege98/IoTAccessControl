@@ -1,0 +1,102 @@
+{
+  "info": {
+    "title": "IoT Access Control API",
+    "description": "API per la gestione dell'accesso in un edificio tramite IoT.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/iotmessage": {
+      "post": {
+        "summary": "Invia un messaggio IoT con il codice e l'ID del dispositivo.",
+        "responses": {
+          "200": {
+            "description": "Messaggio IoT ricevuto con successo."
+          },
+          "400": {
+            "description": "Richiesta malformata."
+          },
+          "500": {
+            "description": "Errore interno del server."
+          }
+        }
+      }
+    },
+    "/firstcode": {
+      "get": {
+        "summary": "Ottieni il primo codice inviato dall'ultimo dispositivo IoT.",
+        "responses": {
+          "200": {
+            "description": "Codice recuperato con successo.",
+          },
+          "404": {
+            "description": "Nessun codice ricevuto finora."
+          },
+          "500": {
+            "description": "Errore interno del server."
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Controlla le credenziali di accesso di un utente.",
+        "responses": {
+          "200": {
+            "description": "Login effettuato con successo."
+          },
+          "400": {
+            "description": "Richiesta malformata."
+          },
+          "401": {
+            "description": "Nome utente o password non corretti."
+          },
+          "500": {
+            "description": "Errore interno del server."
+          }
+        }
+      }
+    },
+    "/firstcodechecker": {
+      "post": {
+        "summary": "Controlla se l'utente ha accesso all'edificio.",
+        "responses": {
+          "200": {
+            "description": "Utente ha accesso all'edificio."
+          },
+          "400": {
+            "description": "Richiesta malformata."
+          },
+          "401": {
+            "description": "Codice non corretto."
+          },
+          "403": {
+            "description": "Utente non ha accesso all'edificio."
+          },
+          "500": {
+            "description": "Errore interno del server."
+          }
+        }
+      }
+    },
+    "/accesscode": {
+      "post": {
+        "summary": "Genera e invia un nuovo codice di accesso.",
+        "responses": {
+          "200": {
+            "description": "Codice di accesso generato con successo.",
+          },
+          "400": {
+            "description": "Richiesta malformata."
+          },
+          "403": {
+            "description": "Impossibile verificare il primo codice o l'accesso dell'utente all'edificio."
+          },
+          "500": {
+            "description": "Errore interno del server."
+          }
+        }
+      }
+    }
+  },
+  "swagger": "2.0"
+}
