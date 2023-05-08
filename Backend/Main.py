@@ -22,13 +22,12 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 # Variabile globale per memorizzare il codice corrente
-current_code = None
-id_device = None
+global FIRSTCODE
+global DEVICE_ID
 
 
 @app.route('/iotmessage', methods=['POST'])
 def iot_message():
-    global current_code
     try:
         data = request.get_json(force=True)
 
@@ -42,7 +41,7 @@ def iot_message():
         print(f"Received message from device {id_device} with code {code}")
 
         # Memorizza il codice corrente nella variabile globale
-        current_code = code
+        FIRSTCODE = code
 
         return jsonify({"success": True}), 200
     except Exception as e:
@@ -51,11 +50,10 @@ def iot_message():
 
 @app.route('/firstcode', methods=['GET'])
 def first_code():
-    global current_code
-    if current_code is None:
+    if FIRSTCODE is None:
         return jsonify({"error": "No code received yet"}), 404
 
-    return jsonify({"code": current_code, "id_device": id_device}), 200
+    return jsonify({"code": FIRSTCODE, "id_device": DEVICE_ID}), 200
 
 
 @app.route('/login', methods=['POST'])
@@ -104,7 +102,7 @@ def generate_new_code():
     return random.randint(1000, 9999)
 
 
-@app.route('/accesscode', methods=['POST'])
+@app.route('/accesscode', methods=['GET'])
 def access_code():
     try:
         data = request.get_json(force=True)
@@ -114,13 +112,14 @@ def access_code():
 
         if user_id is None or building_id is None or first_code is None:
             return jsonify({"error": "Invalid payload"}), 400
-
-        # Verifica il first code e l'accesso al building
         data_check = {
             "user_id": user_id,
             "building_id": building_id,
-            "code": first_code
+            "code": FIRSTCODE
         }
+
+
+        # Verifica il first code e l'accesso al building
         check_response = first_code_checker(data_check)
 
         # Se il controllo ha avuto successo, genera e invia il nuovo codice
