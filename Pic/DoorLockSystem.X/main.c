@@ -23,13 +23,16 @@ void main(void) {
     Lcd_Write_String("ab ");
     TRISD = 0x00;
     PORTD = 0x00;
-
+    
     
     uint16_t received_count;
 
     while (1) {
-        communication_task();
         
+        communication_task();
+        TRISB |= 0x02;
+        if(!(PORTB & 0x02))
+        {
         shared_packet_t send_packet;
         memset(&send_packet,0x00,sizeof(shared_packet_t));
         send_packet.packet_type = PACKET_GENERATE;
@@ -37,14 +40,19 @@ void main(void) {
         strncpy(send_packet.target_device, "raspi", DEVICE_SERIAL_NUMBER_MAX_LENGHT);
         send_packet.generate_command.code = 12;
         UART_send_packet(&send_packet);
-     
+        __delay_ms(200);
+        }
        
-        if(received_queue_thereispending() > 0)
+        if(received_queue_thereispending())
         {
             shared_packet_t packet;
             received_queue_get_packet(&packet);
             Lcd_Clear();
-            Lcd_Write_Int(++received_count);
+            Lcd_Write_Int(packet.length);
+            Lcd_Write_Char(' ');
+            Lcd_Write_Int(packet.generate_command.code);
+            Lcd_Write_Char(' ');
+            Lcd_Write_String(packet.source_device);
         }
     }
 }

@@ -30,16 +30,26 @@ public class Worker : BackgroundService
         if (buffer.HasValue)
         {
             List<byte> bytes = new();
-            
-            var packetLength = serial!.ReadByte();
-            packetLength <<= serial!.ReadByte();
-            bytes.AddRange(BitConverter.GetBytes(packetLength));
+
+            var packetLength = serial!.ReadByte() + (serial!.ReadByte() << 8);
+
+            bytes.Add((byte)(packetLength & 0xFF));
+            bytes.Add((byte)((packetLength >> 8) & 0xFF));
 
             for (int i = 0; i < packetLength - 2; i++)
             {
-                bytes.Add((byte) serial!.ReadByte());
-                
+
+                bytes.Add((byte)serial!.ReadByte());
+
             }
+
+            if (packetLength != bytes.Count)
+            {
+                _logger.LogError("Packet length is not equal to bytes count");
+            }
+
+
+            System.Console.WriteLine("\n");
             _logger.LogInformation("{date} {text}", DateTime.Now.ToString("s"),Encoding.ASCII.GetString(bytes.ToArray()));
             serial.Write(bytes.ToArray(),0,bytes.Count);
             serial.DiscardOutBuffer();

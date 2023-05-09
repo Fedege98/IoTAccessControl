@@ -3,7 +3,7 @@
 #include <string.h>
 #include"shared_communication.h"
 #include "communication.h"
-
+#include "../peripherals/lcd.h"
 #define MAX_QUEUE_LENGHT 3
 
 static uint8_t is_line_busy;
@@ -49,7 +49,7 @@ void UART_data_received()
 {
     static char buffer[sizeof(shared_packet_t)];
     static int index;
-  
+
     char data = RCREG; // Read received data from UART receive buffer
         if (index < sizeof(shared_packet_t)) {
             buffer[index++] = data;
@@ -57,25 +57,30 @@ void UART_data_received()
             if (index >= sizeof(shared_packet_t)) {
                 if(receive_queue_elements < MAX_QUEUE_LENGHT)
                 {
-                    memcpy(&receive_queue[++receive_queue_elements], buffer, sizeof(shared_packet_t));
+                    shared_packet_t received_packet;
+                    memcpy(&received_packet, buffer, sizeof(shared_packet_t));
+                    if(!strcmp(received_packet.target_device,DEVICE_SERIAL_NUMBER))
+                        memcpy(&receive_queue[receive_queue_elements++], buffer, sizeof(shared_packet_t));
                 }
                 else
                 {
                     //TODO manage full queue
                 }
                 index = 0;
+                memset(buffer,0x00,sizeof(shared_packet_t));
             }
         }
 }
 
 uint8_t received_queue_thereispending()
 {
-    return receive_queue_elements;
+    return receive_queue_elements > 0;
 }
 
 void received_queue_get_packet(shared_packet_t* packet)
 {
-    memcpy(packet, &receive_queue[--receive_queue_elements], sizeof(shared_packet_t));
+    if(receive_queue_elements > 0)
+        memcpy(packet, &receive_queue[--receive_queue_elements], sizeof(shared_packet_t));
 }
 
 

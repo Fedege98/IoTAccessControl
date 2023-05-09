@@ -9,7 +9,7 @@ IHost host = Host.CreateDefaultBuilder(args)
             {
                 BaudRate = 115200,
                 Parity = Parity.None,
-                PortName = "COM2",
+                PortName = "COM3",
                 StopBits = StopBits.One,
                 WriteTimeout = 200,
                 ReadTimeout = 2000,
