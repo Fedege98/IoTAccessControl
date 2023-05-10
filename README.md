@@ -1,5 +1,5 @@
-#Progetto API per la Gestione degli Accessi 🚀
-##Descrizione 📚
+Progetto API per la Gestione degli Accessi 🚀
+Descrizione 📚
 
 Questo progetto implementa una soluzione per gestire l'accesso ad un edificio universitario tramite un tastierino numerico fisico. L'API riceve un codice generato da un tastierino numerico tramite un gateway IoT. Questo codice viene visualizzato all'utente tramite una web app. L'utente inserisce il codice nella web app, che a sua volta genera un nuovo codice. Se l'utente inserisce il nuovo codice nel tastierino numerico, la porta dell'edificio si apre.
 
@@ -15,15 +15,15 @@ Il database è costituito da tre tabelle:
     AccessLog: registrazione accessi all'edificio.
     Device: registrazione dei devices.
 
-###Struttura del codice 📁
+Struttura del codice 📁
 
 Il codice è suddiviso in cartelle, ognuna di esse simula un componente del progetto.
 
-##Futuri miglioramenti 🌈
+Futuri miglioramenti 🌈
 Il progetto potrebbe essere migliorato in diversi modi, ad esempio aggiungendo la gestione degli errori, un'interfaccia utente più sofisticata, e rendendo l'API più sicura.
 
-##Contribuire al progetto 👥
+Contribuire al progetto 👥
 Le pull request sono le benvenute. Per modifiche importanti, aprire prima un problema per discutere cosa si vorrebbe cambiare. Assicurarsi di aggiornare i test come appropriato.
-####Licenza 📝
+Licenza 📝
 
 MIT
